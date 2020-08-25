@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lab-01.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lab-01-ibm-cloud-functions-%D0%BE%D0%B7%D0%BD%D0%B0%D0%BA%D0%BE%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81-ibm-cloud-dashboard">LAB-01. IBM Cloud Functions. Ознакомление с IBM Cloud Dashboard</h1>
+<!-- TOC BEGIN -->
+<ul>
+<li>
+<p>1 <a href="#p1">Вступление</a></p>
+</li>
+<li>
+<p>2 <a href="#p2">Ознакомление с IBM Clound Dashboard</a></p>
+</li>
+<li>
+<p>3 <a href="#p3">Создание простой функции из шаблона</a></p>
+</li>
+<li>
+<p>4 <a href="#p4">Создание собственной функции</a></p>
+</li>
+<li>
+<p>5 <a href="#p5">Выставить функцию, как REST API</a></p>
+</li>
+</ul>
+<!-- TOC END -->
+<p><a name="p1"></a></p>
+<h2 id="%D0%B2%D1%81%D1%82%D1%83%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5">Вступление</h2>
+<p>В данной лабораторной работе ознакомимся с IBM Cloud Dashboard по созданию IBM Cloud Functions.</p>
+<p><a name="p2"></a></p>
+<h2 id="ibm-cloud-functions-%D0%BD%D0%B0-ibm-cloud-dashboard">IBM Cloud Functions  на IBM Cloud Dashboard</h2>
+<p>Если зайти в IBM Cloud Dashboard, то IBM Cloud Functions  становятся сразу доступными. На pic-1  показано, где можно найти их.</p>
+<p><kbd><img src="doc/lab-01-pic-1.png" /></kbd></p>
+<p style="text-align: center;">pic-1</p>                        
+<p>В результате нажатия на пиктограмму переходим в главную консоль IBM Cloud Functions. На pic-2 показаны основные элементы управления, необходимые для создания функций.</p>
+<p><kbd><img src="doc/lab-01-pic-2.png" /></kbd></p>
+<p style="text-align: center;">pic-2</p>
+<p>Нажав на кнопку &quot;Start Creating&quot;  попадаем в главный экран по созданию функций (pic-3).</p>
+<p><kbd><img src="doc/lab-01-pic-3.png" /></kbd></p>
+<p style="text-align: center;">pic-3</p>
+<p>На данном скриншоте показано все многообразие возможностей по созданию функций.</p>
+<p><a name="p3"></a></p>
+<h2 id="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B9-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8%D0%B7-%D1%83%D0%B6%D0%B5-%D0%B8%D0%BC%D0%B5%D1%8E%D1%89%D0%B5%D0%B3%D0%BE%D1%81%D1%8F-%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%B0">Создание простой функции из уже имеющегося шаблона</h2>
+<p>Для этого нужно опять войти &quot;Start Creating&quot;, выбать &quot;From Template&quot; и выберем &quot;Hello World&quot; (pic-4).</p>
+<p><kbd><img src="doc/lab-01-pic-4.png" /></kbd></p>
+<p style="text-align: center;">pic-4</p>
+<p>После успешного создания попадем в окно с исходным кодом функции (pic-5).</p>
+<p><kbd><img src="doc/lab-01-pic-5.png" /></kbd></p>
+<p style="text-align: center;">pic-5</p>
+<p>В данном примере, при нажатии на кнопку <strong>&quot;Invoke&quot;</strong>, выполняется запуск функции и результаты работы функции увидим в правой части окна. Параметров в функцию не передавалось, поэтому увидим ответ:</p>
+<pre class="hljs"><code><div>  {
+        <span class="hljs-attr">"greeting"</span>: <span class="hljs-string">"Hello stranger!"</span>
+  }
+
+</div></code></pre>
+<p>Теперь по кнопке: <strong>&quot;Invoke with parameters&quot;</strong> зададим параметры запуска функции. Параметры задаются в виде плоского JSON файла. Ниже паказан пример json  параметров.</p>
+<pre class="hljs"><code><div>
+{   <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Jim"</span>,
+    <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"222-33-44"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1234567</span>
+}
+</div></code></pre>
+<p>Данные этого json нужно вставить в окно ввода параметров и повторить вызов.</p>
+<p><kbd><img src="doc/lab-01-pic-6.png" /></kbd></p>
+<p style="text-align: center;">pic-6</p>
+<p>В этом случае ответ уже изменился, и мы получили в ответе <strong>&quot;Hello Jim&quot;</strong>, т.е. параметр <strong>&quot;name&quot;</strong> был прочитан</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"greeting"</span>: <span class="hljs-string">"Hello Jim"</span>
+}
+</div></code></pre>
+<p><a name="p4"></a></p>
+<h2 id="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D0%BE%D0%B1%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8">Создание собственной функции</h2>
+<p>Перейдем к списку <strong>&quot;Actions&quot;</strong>. Мы увидим только одну функцию helloworld пакете Lab01-1 (pic-7). Для создания своей функции,
+<kbd><img src="doc/lab-01-pic-7.png" /></kbd></p>
+<p style="text-align: center;">pic-7</p>
+<p>Для создания собственной функции нужно нажать кнопку <strong>&quot;Create&quot;</strong> и выбрать опцию <strong>&quot;Action&quot;</strong>  (pic-8).</p>
+<p><kbd><img src="doc/lab-01-pic-8.png" /></kbd></p>
+<p style="text-align: center;">pic-8</p>
+<p>Для создания своей функции нужно:</p>
+<ul>
+<li>
+<p>внести имя Action, например: <strong>&quot;GetCustomerByPhone&quot;</strong>;</p>
+</li>
+<li>
+<p>выбрать имя существующего пакета, или создать новый;</p>
+</li>
+<li>
+<p>нажать <strong>&quot;Create&quot;</strong>.</p>
+</li>
+</ul>
+<p>На (pic-9)  показано заполненное окно ввода.
+<kbd><img src="doc/lab-01-pic-9.png" /></kbd></p>
+<p style="text-align: center;">pic-9</p>
+<p>Нажав кнопку <strong>&quot;Create&quot;</strong>, получим шаблон для написания своего исходного кода (pic-10).</p>
+<p><kbd><img src="doc/lab-01-pic-10.png" /></kbd></p>
+<p style="text-align: center;">pic-10</p>
+<p>Для написания своей функции (action), придумаем абстрактную задачу. Разработать асинхронную функцию, которая по номеру телефона возвратит данные клиента.</p>
+<p>На вход  функция принимает json объект:</p>
+<pre class="hljs"><code><div>    {<span class="hljs-attr">"phone"</span>: <span class="hljs-string">"222-33-44"</span>}
+</div></code></pre>
+<p>В случае успешного выполнения, функция возвращает json-обьект:</p>
+<pre class="hljs"><code><div>    {
+      <span class="hljs-attr">"cif"</span>: <span class="hljs-string">"100012340"</span>,
+      <span class="hljs-attr">"cif_address"</span>: <span class="hljs-string">"Kyiv, Khreschatic, 26, flat 123"</span>,
+      <span class="hljs-attr">"cif_firstname"</span>: <span class="hljs-string">"Pavlo"</span>,
+      <span class="hljs-attr">"cif_lasname"</span>: <span class="hljs-string">"Petrenko"</span>
+    }
+</div></code></pre>
+<p>В случае, если телефон не передан, функция генерирует ошибку с сообщением: <em>&quot;Не передан параметр params.phone!&quot;</em></p>
+<p>Исходный код функции находится в файле: <a href="/LAB-1/GetCustomerByPhone.js">/LAB-1/GetCustomerByPhone.js</a>
+Исходный код необходимо вставить в окно браузера. В <strong>&quot;Invoke with parameters&quot;</strong>  необходимо вставить json с параметрами запуска</p>
+<pre class="hljs"><code><div>    {<span class="hljs-attr">"phone"</span>: <span class="hljs-string">"222-33-44"</span>}
+</div></code></pre>
+<p>и запустить на выполнение по кнопке <strong>&quot;Invoke&quot;</strong>.
+В результате увидим экран как на pic-11.</p>
+<p><kbd><img src="doc/lab-01-pic-11.png" /></kbd></p>
+<p style="text-align: center;">pic-11</p>
+<p>Функция работает. Теперь необходимо ее настроить в качестве REST API  для публичного использования.</p>
+<p><a name="p5"></a></p>
+<h2 id="%D0%B2%D1%8B%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8E-%D0%BA%D0%B0%D0%BA-rest-api">Выставить функцию, как REST API</h2>
+<p>Для этого необходимо</p>
+<ul>
+<li>в разделе Endpoints  включить Web Action (pic-12).</li>
+</ul>
+<p><kbd><img src="doc/lab-01-pic-12.png" /></kbd></p>
+<p style="text-align: center;">pic-12</p>
+<ul>
+<li>вернуться в раздел основного меню functions и выбрать раздел API (pic-13).</li>
+</ul>
+<p><kbd><img src="doc/lab-01-pic-13.png" /></kbd></p>
+<p style="text-align: center;">pic-13</p>
+<ul>
+<li>вводим наименование API и BaseURL.
+<kbd><img src="doc/lab-01-pic-14.png" /></kbd></li>
+</ul>
+<p style="text-align: center;">pic-14</p>
+<ul>
+<li>Устанавливаем http суффикс и http метод.
+<kbd><img src="doc/lab-01-pic-15.png" /></kbd></li>
+</ul>
+<p style="text-align: center;">pic-15</p>
+<ul>
+<li>Авторизацию мы не предусматриваем, поэтому опускаемся вниз и нажимаем <strong>&quot;Create&quot;</strong></li>
+</ul>
+<p>В результате выполнения шагов мы получим экран мониторинга и управления API (pic-16).</p>
+<p><kbd><img src="doc/lab-01-pic-16.png" /></kbd></p>
+<p style="text-align: center;">pic-16</p>
+<p>Зайдя в меню <strong>review and test</strong>, выберите вкладку <strong>try it</strong>, введите параметры запроса и запустите на выполнение. Результат показан на pic-17.</p>
+<p><kbd><img src="doc/lab-01-pic-17.png" /></kbd></p>
+<p style="text-align: center;">pic-17</p>
+
+</body>
+</html>

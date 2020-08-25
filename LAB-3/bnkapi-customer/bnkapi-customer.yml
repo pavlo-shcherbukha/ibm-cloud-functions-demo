@@ -1,0 +1,27 @@
+﻿packages:
+  bankapi-customer:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      getCustomers:
+        function: src/getCustomers.js
+        runtime: nodejs
+        web-export: false
+      getCustomerbyId:
+        function: src/getCustomerByID.js
+        runtime: nodejs
+        inputs:
+          cust_id: number
+        web-export: false
+      createCustomer:
+        function: src/createCustomer.js
+        runtime: nodejs
+        inputs:
+          first_nm: string
+          last_nm: string
+          email: string
+          tin: string
+          phone: string
+        outputs:
+          idcust: integer
+        web-export: false

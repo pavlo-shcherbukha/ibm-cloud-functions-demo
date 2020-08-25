@@ -1,0 +1,31 @@
+﻿packages:
+  bankapi-loanreq:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      getLoanreqs:
+        function: src/getLoanreqs.js
+        runtime: nodejs
+        web-export: false
+      getLoanreqbyid:
+        function: src/getLoanreqbyid.js
+        runtime: nodejs
+        inputs:
+          loan_id: number
+        web-export: false
+      createLoanreq:
+        function: src/createLoanreq.js
+        runtime: nodejs
+        inputs:
+          mtype: "string"
+          idcust: "number"
+          cust_message: "string"
+          cust_email: "string"
+          cust_phone: "string"
+          loan_type: "string"
+          loan_amount: "number"
+          loan_term: "number"
+          loan_collat_dsc: "string"
+        outputs:
+          id: integer
+        web-export: false

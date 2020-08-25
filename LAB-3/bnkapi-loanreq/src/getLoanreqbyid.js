@@ -1,0 +1,107 @@
+﻿/**
+  *
+  * main() will be run when you invoke this action
+  *
+  * Сервис получения  курса NBU за указанную дату по указанной валюте
+  *
+  * @see https://old.bank.gov.ua/control/uk/publish/article?art_id=38441973&cat_id=38459171#exchange
+  *
+  * @param {object} a_params - параметры запроса
+  * @param {object} a_params.date - дата курса в формате YYYY-MM-DD
+  * @param {object} a_params.valcode - кода валюты букв: USD, EUR
+  *
+  * Пример запроса:
+  *
+  * {
+  *     "date": "2020-06-16",
+  *     "valcode": "USD"
+  * }
+  * 
+  *
+  * @return {object} result
+  * @return {boolean} result.ok  true-все хорошо, ищем rdata, 
+  * @return {array} result.rdata
+  * @return {string} result.rdata[i].cc код валюты буквенный: USD, EUR
+  * @return {string} result.rdata[i].exchangedate  Дата курса в формате DD.MM.YYYY
+  * @return {number} result.rdata[i].r030 код валюты цифровой 840, 987
+  * @return {number} result.rdata[i].rate курс за единицу
+  * @return {string} result.rdata[i].txt  название валюты текстовое
+  *
+  * 
+  *   
+  */   
+const axios = require('axios');
+
+// Заголовки по умолчанию
+const i_headers = { 'Content-Type': 'application/json',
+		            'accept': 'application/json'
+};
+// url сервиса на получение  текущего курса  за дату по валюте
+//             https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&date=20200627&json          
+const i_url = 'https://a7275984.eu-gb.apigw.appdomain.cloud/bnkapi-loan/loan';
+
+const i_logid = 'bnkapi-loanreq/getLoanreqbyid: ';
+
+function main(a_params) {
+    var l_step='';
+    l_step = i_logid + 'Старт';
+    console.log(l_step);
+
+    if ( !isDefined(a_params.id) ){
+            var err = new Error(i_logid + 'Не передан параметр a_params.id') ;
+            throw err;
+    } 
+
+
+    let l_reqparams = {  headers: i_headers, params: { id: a_params.id}};
+
+
+ 
+    console.log(l_step + '- выполняю запрос');    
+    
+    return  axios.get(i_url, l_reqparams)
+	.then ( result_exch => {
+	    if (result_exch.status === 200) {
+	        l_step = i_logid + 'Сервис вернул успешный статус: [' + result_exch.status.toString() + ']';
+            console.log(l_step);
+	   } else {
+	        l_step = i_logid + 'Сервис вернул статус - ошибку: [' + result_exch.status.toString() + ']';
+            console.log(l_step);
+            throw new Error(l_step);
+
+	   } 
+	   l_step = i_logid + 'Возвращаю ответ' ;
+       console.log(l_step);
+	   var result_ok={ ok: true,rdata: result_exch.data};
+	   return Promise.resolve(   result_ok );
+	   
+	})
+	.catch ( err => {
+	    l_step = i_logid + 'Возвращаю ответ с ошибкой!' ;
+        console.log(l_step);
+	    var result_err={ ok: false, error: err ,rdata: null};
+	    return Promise.reject(  result_err );
+	})
+}
+
+	/**
+	 * Проверяет, что переменная на undefined и не null
+	 * если OK возвразает true, если не сложилось - false
+	 * @param {any} p_value любая переменная
+	 * @returns {boolean} l_result результат проверки переменной 
+	 */
+function isDefined(p_value) {
+		let l_result = true ;
+		if (typeof p_value === "undefined"){
+			l_result=false;
+		} else if ( p_value === null){
+			l_result=false;
+		} else {
+			// do nothing
+		};
+		return l_result ;     
+}
+
+exports.main = main;
+
+

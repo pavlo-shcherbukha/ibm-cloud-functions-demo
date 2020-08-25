@@ -1,0 +1,21 @@
+ ibmcloud login -a cloud.ibm.com --apikey JUQQRhorSFTifSSmVn0Y7mIPNv9cUrG4Sg2gNsPt8pAU -r eu-gb -g default -o panama -s shdev   
+  ibmcloud fn package list
+   ibmcloud fn action list 
+
+ 
+ ibmcloud fn deploy --manifest bnkapi-customer.yml
+ ibmcloud fn package list
+ ibmcloud fn action list
+
+
+ ibmcloud fn action invoke ACTION_NAME [--blocking] [--param KEY VALUE] [--param-file FILE] [--result]
+
+ ibmcloud fn action invoke bankapi-customer/getCustomers 
+ ibmcloud fn action invoke bankapi-customer/getCustomerbyId --param id_cust 4 
+ ibmcloud fn action invoke bankapi-customer/getCustomerbyId --param-file params/getCustomerByID.json
+ ibmcloud fn action invoke bankapi-customer/getCustomerbyId --param-file params/getCustomerByID.json --result
+
+ log 
+ ibmcloud fn activation logs [ACTIVATION_ID]  [--strip]
+ ibmcloud fn activation logs 914d4c45944342468d4c4594439246b9 
+  ibmcloud fn activation result db355334a09348c7b55334a09368c70b
